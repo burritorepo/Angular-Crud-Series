@@ -1,0 +1,41 @@
+<div class="card">
+
+  <div class="card__btns">
+    <a class="btn" routerLink="/users/edit/{{user.id}}">Edit</a>
+    <a class="btn" (click)="onDelete($event, user.id)">Delete</a>
+  </div>
+  <div class="card__picture">
+    <a routerLink="/users/{{user.id}}">
+      <img [src]="user.photo" alt="{{user.firstName}} {{user.lastName}}" title="{{user.firstName}} {{user.lastName}}">
+    </a>
+  </div>
+  <div class="card__info">
+    <ul>
+      <li>
+        <span>Nombre</span>
+        <h2 class="detail">
+          <a routerLink="/users/{{user.id}}">
+            {{user.firstname}} {{user.lastname}}
+          </a>
+        </h2>
+      </li>
+      <li>
+        <span>Email</span>
+        <h3 class="detail">
+          <a href="mailto:{{user.email}}">{{user.email}}</a>
+        </h3>
+      </li>
+      <li>
+        <span>Telefono</span>
+        <h4 class="detail">
+          <a href="tel:{{user.phone}}">{{user.phone}}</a>
+        </h4>
+      </li>
+      <li>
+        <span>Sobre mi</span>
+        <p class="detail">{{user.about}}</p>
+      </li>
+    </ul>
+  </div>
+
+</div>
