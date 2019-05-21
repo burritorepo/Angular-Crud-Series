@@ -7,7 +7,7 @@ import {
 
 import { UsersRoutingModule } from './users.routing.module';
 import { USERS_COMPONENTS } from './components';
-import { ApiService } from '../../api/api.service';
+import { UserService } from '../../api';
 
 @NgModule({
   declarations: [...USERS_COMPONENTS],
@@ -18,6 +18,6 @@ import { ApiService } from '../../api/api.service';
     UsersRoutingModule
   ],
   exports: [],
-  providers: [ApiService],
+  providers: [UserService],
 })
 export class UsersModule { }

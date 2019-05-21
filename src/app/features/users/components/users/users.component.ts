@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../../api/api.service';
+import { UserService } from '../../../../api';
 
 @Component({
   selector: 'app-users',
@@ -9,7 +9,7 @@ import { ApiService } from '../../../../api/api.service';
 export class UsersComponent implements OnInit {
   valChange = 0;
   users: Array<object>;
-  constructor(private api: ApiService) { }
+  constructor(private userService: UserService) { }
 
   onChange() {
     this.valChange++;
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.getUsers().subscribe((users) => {
+    this.userService.getAllUser().subscribe((users) => {
       this.users = users;
     })
   }

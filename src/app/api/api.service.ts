@@ -1,34 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
+
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json; charset=UTF-8'
+    'Content-Type':  'application/json; charset=UTF-8'
   })
 };
 
 @Injectable()
 export class ApiService {
-  constructor(private http: HttpClient) { }
+  constructor(protected http: HttpClient) { }
 
-  getUsers():Observable<any> {
-    return this.http.get('http://localhost:3000/users');
+  private formatErrors(error: any) {
+    return throwError(error);
   }
 
-  addUser(body) {
-    return this.http.post('http://localhost:3000/users', JSON.stringify(body), httpOptions);
+  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}`, { params });
   }
 
-  updateUser(id, body) {
-    return this.http.put(`http://localhost:3000/users/${id}`, JSON.stringify(body), httpOptions);
+  put(path: string, body: Object = {}): Observable<any> {
+    return this.http
+      .put(`${environment.api_url}${path}`, JSON.stringify(body), httpOptions)
+      .pipe(catchError(this.formatErrors));
   }
 
-  deleteUser(id) {
-    return this.http.delete(`http://localhost:3000/users/${id}`);
+  post(path: string, body: Object = {}, options?: any): Observable<any> {
+    return this.http.post(`${environment.api_url}${path}`, body, options);
   }
 
-  getUser(id) {
-    return this.http.get(`http://localhost:3000/users/${id}`);
+  delete(path): Observable<any> {
+    return this.http
+      .delete(`${environment.api_url}${path}`)
+      .pipe(catchError(this.formatErrors));
   }
 }

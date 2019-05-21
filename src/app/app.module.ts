@@ -1,3 +1,5 @@
+import { API_PROVIDERS } from './api'
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +16,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [...API_PROVIDERS],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

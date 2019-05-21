@@ -3,24 +3,21 @@
     <div class="form-row">
       <div class="form-celd">
         <label>Nombre</label>
-        <input type="text" formControlName="firstname"/>
-        <div ngClass="{'form-error': firstname.invalid}" *ngIf="firstname.invalid  && (firstname.dirty || firstname.touched)">
-          FirstName invalid
-        </div>
+        <input required class="form-control" type="text" formControlName="firstName"/>
       </div>
       <div class="form-celd">
         <label>Apellido</label>
-        <input type="text" formControlName="lastname"/>
+        <input required class="form-control" type="text" formControlName="lastName"/>
       </div>
     </div>
     <div class="form-row">
       <div class="form-celd">
         <label>Correo</label>
-        <input type="text" formControlName="email"/>
+        <input class="form-control" type="text" formControlName="email"/>
       </div>
       <div class="form-celd">
         <label>Telefono</label>
-        <input type="text" formControlName="phone"/>
+        <input class="form-control" type="text" formControlName="phone"/>
       </div>
     </div>
     <div class="form-row">
@@ -38,26 +35,18 @@
       </div>
       <div class="form-celd">
         <label>Url fotografia</label>
-        <input class="form-control" type="text"
-        formControlName="photo"/>
+        <input class="form-control" type="text" formControlName="photo"/>
       </div>
     </div>
     <div class="form-row">
       <div class="form-celd">
         <label>Sobre mi</label>
-        <textarea class="form-control" cols="30"
-        rows="10"
-        formControlName="about"></textarea>
+        <textarea class="form-control" name="" id="" cols="30" rows="10" formControlName="about"></textarea>
       </div>
     </div>
     <div class="form-row">
-      <button class="btn btn-primary" type="submit"
-      [disabled]="!userForm.valid">Aceptar</button>
+      <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Aceptar</button>
       <button class="btn" type="reset">Cancelar</button>
     </div>
   </form>
-
-  Form Value {{userForm.value | json}}
-  <br/>
-  Form valid {{userForm.valid}}
 </div>

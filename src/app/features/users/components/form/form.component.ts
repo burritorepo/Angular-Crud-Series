@@ -1,13 +1,12 @@
 import {
   Component,
   OnInit,
+  Input,
   Output,
   EventEmitter
 } from '@angular/core';
-
 import {
-  FormControl,
-  FormGroup,
+  FormBuilder,
   Validators
 } from '@angular/forms';
 
@@ -17,26 +16,33 @@ import {
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  @Output() dataUser = new EventEmitter<object>();
+  @Input() valueUser: any;
+  @Output() valueForm = new EventEmitter<boolean>();
 
-  userForm = new FormGroup({
-    firstname: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-    photo: new FormControl('', Validators.required),
-    about: new FormControl('', Validators.required)
+  userForm = this.formBuilder.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    phone: ['', Validators.required],
+    country: ['', Validators.required],
+    photo: ['', Validators.required],
+    about: ['', Validators.required]
   })
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    if (this.valueUser) {
+      this.userForm.patchValue(
+        this.valueUser
+      )
+    }
   }
 
-  get firstname() { return this.userForm.get('firstname'); }
-
-  ngOnInit(): void { }
-
   onSubmit() {
-    this.dataUser.emit(this.userForm.value)
+    console.log('this.userForm.valid', this.userForm.valid)
+    if (this.userForm.valid) {
+      this.valueForm.emit(this.userForm.value)
+    }
   }
 }

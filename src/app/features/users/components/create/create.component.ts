@@ -6,7 +6,7 @@ import {
   Router
 } from '@angular/router';
 
-import { ApiService } from '../../../../api/api.service';
+import { UserService } from '../../../../api';
 
 @Component({
   selector: 'app-create',
@@ -14,14 +14,17 @@ import { ApiService } from '../../../../api/api.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  constructor(private router: Router, private api: ApiService) {
-  }
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void { }
 
-  onDataUser(value) {
-    this.api.addUser(value).subscribe(() => {
+  onValueForm(value) {
+    console.log('datosformulario',value);
+    this.userService.createUser(value).subscribe(() => {
       this.router.navigate(['/users']);
-    })
+    });
   }
 }
